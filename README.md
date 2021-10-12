@@ -8,7 +8,7 @@ This is a set of tools to train a machine learning model to generate YouTube vid
 Model training requires information about videos, channels and comments.
 
 1. Video info must be stored in a json file in the following format:
-    ```json
+    ```
     {
       "id": "<VIDEO ID>",
       "comments_threads": [
@@ -48,7 +48,7 @@ Model training requires information about videos, channels and comments.
 ### Parameters
 
 Parameters for data generation and training are stored in a context file in the following json format:
-```json
+```
 {       
     "db": { 
         "video_dir": "<PATH TO VIDEO DIRECTORY>",
