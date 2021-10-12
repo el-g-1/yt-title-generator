@@ -5,7 +5,7 @@ import tensorflow as tf
 
 
 def transform_to_inputs(context):
-    '''Transforms input examples into CBOW examples'''
+    """Transforms input examples into CBOW examples"""
     vocab = vocabulary_utils.load_vocabulary_tsv(
         context.embedding.word_frequencies_path,
         freq_min=context.embedding.frequency_min,

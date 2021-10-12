@@ -4,7 +4,8 @@ import tensorflow as tf
 
 
 def transform_to_inputs(context):
-    '''Loads and transforms data set with GAN model inputs'''
+    """Loads and transforms data set with GAN model inputs"""
+
     def example_to_input(example):
         script = example.features.feature["script"].int64_list.value
         latent = example.features.feature["latent"].int64_list.value

@@ -4,7 +4,7 @@ import os
 
 
 class ShardedWriter:
-    '''Writer that shuffles/shards data into multiple files'''
+    """Writer that shuffles/shards data into multiple files"""
 
     def __init__(
         self, num_shards=100, output_dir="data", output_filename="data.tfrecord"
@@ -23,7 +23,7 @@ class ShardedWriter:
             self.locks.append(threading.Lock())
 
     def write(self, data):
-        '''Writes data into one of the shards'''
+        """Writes data into one of the shards"""
         serialized = data.SerializeToString()
         shard = hash(serialized) % self.num_shards
         with self.locks[shard]:

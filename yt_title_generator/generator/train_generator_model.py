@@ -1,10 +1,8 @@
 import tensorflow as tf
-import tensorflow.keras.backend as K
 import yt_title_generator.generator.transform_to_generator_inputs as transform_to_generator_inputs
 import yt_title_generator.generator.train_discriminator_model as train_discriminator_model
 import yt_title_generator.utils.run as run_utils
 import yt_title_generator.utils.vocabulary as vocabulary_utils
-import tensorflow.keras.backend as K
 import argparse
 import os
 
@@ -14,7 +12,7 @@ def load_model(checkpoint_path):
 
 
 def define_generator_model(context):
-    '''Defines architecture for generator model'''
+    """Defines architecture for generator model"""
     input_script = tf.keras.layers.Input(
         shape=(context.gan.discriminator.max_script_tokens,), name="script"
     )
@@ -69,7 +67,7 @@ def define_generator_model(context):
 
 
 def load_discriminator_model(context):
-    '''Loads discriminator model without embedding layer for titles'''
+    """Loads discriminator model without embedding layer for titles"""
 
     input_after_embed = tf.keras.layers.Input(
         shape=(
@@ -92,7 +90,7 @@ def load_discriminator_model(context):
 
 
 def define_gan_model(context):
-    '''Defines architecture for GAN model'''
+    """Defines architecture for GAN model"""
 
     input_script = tf.keras.layers.Input(
         shape=(context.gan.discriminator.max_script_tokens,), name="script"
@@ -116,7 +114,7 @@ def define_gan_model(context):
 
 
 def train_model(context, model, generator, dataset):
-    '''Trains GAN model'''
+    """Trains GAN model"""
     model.compile(loss="binary_crossentropy", optimizer="Adam")
 
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
@@ -138,7 +136,7 @@ def train_model(context, model, generator, dataset):
 
 
 def set_cpu_session():
-    '''Disables GPU'''
+    """Disables GPU"""
     tf.config.set_visible_devices([], "GPU")
     visible_devices = tf.config.get_visible_devices()
     for device in visible_devices:
@@ -146,7 +144,7 @@ def set_cpu_session():
 
 
 def train_model_main(context, args):
-    '''Main function for GAN model training'''
+    """Main function for GAN model training"""
 
     if args.cpu:
         set_cpu_session()

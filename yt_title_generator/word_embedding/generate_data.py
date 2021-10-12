@@ -15,7 +15,7 @@ from nltk.stem.snowball import SnowballStemmer
 
 
 def process_text(text, stemmer, writer):
-    '''Processes individual comment'''
+    """Processes individual comment"""
     vocab = collections.defaultdict(int)
 
     tokens = inputs.tokenize(text, stemmer)
@@ -34,7 +34,7 @@ def process_text(text, stemmer, writer):
 
 
 def process_db_video(filepath, stemmer, writer):
-    '''Processes individual video file'''
+    """Processes individual video file"""
     vocab = collections.defaultdict(int)
 
     with open(os.path.join(filepath), "r") as fdata:
@@ -48,7 +48,7 @@ def process_db_video(filepath, stemmer, writer):
 
 
 def generate_examples(context, args):
-    '''Generates examples for word embedding'''
+    """Generates examples for word embedding"""
     files_in_db_dir = glob.glob(os.path.join(context.db.video_dir, "*"))
     filepaths = [os.path.join(context.db.video_dir, f) for f in files_in_db_dir]
 

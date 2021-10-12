@@ -3,12 +3,12 @@ import re
 
 
 def to_token(word, stemmer):
-    '''Stems a word'''
+    """Stems a word"""
     return stemmer.stem(word.lower())
 
 
 def ignore_word(word):
-    '''Filters out non-words'''
+    """Filters out non-words"""
     if word.startswith("@"):
         return True
     if "_" in word:
@@ -23,7 +23,7 @@ def ignore_word(word):
 
 
 def tokenize(text, stemmer):
-    '''Stems each word in the text, preserving emojis'''
+    """Stems each word in the text, preserving emojis"""
     tokens = []
     for word in text.split():
         if ignore_word(word):
@@ -36,11 +36,11 @@ def tokenize(text, stemmer):
 
 
 def update_words_frequency(sentence, word_freq):
-    '''Updates frequences for every token in a sentence'''
+    """Updates frequences for every token in a sentence"""
     for word in sentence:
         word_freq[word] += 1
 
 
 def to_input(text, vocabulary, stemmer):
-    '''Translates tokens into numbers / vocabulary indices'''
+    """Translates tokens into numbers / vocabulary indices"""
     return (vocabulary.get(tok, 0) for tok in tokenize(text, stemmer))

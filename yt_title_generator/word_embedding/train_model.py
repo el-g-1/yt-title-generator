@@ -9,12 +9,12 @@ import os
 
 
 def load_model(checkpoint_path):
-    '''Loads model by path'''
+    """Loads model by path"""
     return tf.keras.models.load_model(checkpoint_path, compile=False)
 
 
 def define_model(window_size, vocab_size, embedding_dim):
-    '''Defines architecture of word embedding model'''
+    """Defines architecture of word embedding model"""
     inp = tf.keras.layers.Input(shape=(window_size * 2))
     embed = tf.keras.layers.Embedding(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=window_size * 2
@@ -27,7 +27,7 @@ def define_model(window_size, vocab_size, embedding_dim):
 
 
 def train_model(model, dataset, checkpoint_path):
-    '''Trains model'''
+    """Trains model"""
     model.compile(loss="categorical_crossentropy", optimizer="Adam")
 
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path)
@@ -38,7 +38,7 @@ def train_model(model, dataset, checkpoint_path):
 
 
 def train_model_main(context, args):
-    '''Main function for model training'''
+    """Main function for model training"""
     dataset, vocab = transform_to_inputs.transform_to_inputs(context)
 
     model = define_model(

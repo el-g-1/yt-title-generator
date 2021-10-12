@@ -3,7 +3,7 @@ import threading
 
 
 class Bar:
-    '''Progress bar'''
+    """Progress bar"""
 
     def __init__(self, text, max):
         self._bar = progress_bar.Bar(
@@ -18,7 +18,8 @@ class Bar:
 
 
 class LockedBar(Bar):
-    '''Thread-safe progress bar'''
+    """Thread-safe progress bar"""
+
     def __init__(self, text, max):
         super().__init__(text, max)
         self._lock = threading.Lock()

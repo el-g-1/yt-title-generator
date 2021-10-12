@@ -7,7 +7,7 @@ import sys
 
 
 def stack_stats(s):
-    '''Formats the given stack trace'''
+    """Formats the given stack trace"""
     res = []
     this_file = __name__.split(".")[-1] + ".py"
     for file_name, line_number, func_name, _ in s:
@@ -18,7 +18,7 @@ def stack_stats(s):
 
 
 def run(fn, inputs, num_workers):
-    '''Executes function fn for each input in num_workers threads'''
+    """Executes function fn for each input in num_workers threads"""
     exceptions = collections.defaultdict(int)
 
     def try_fn(x):
@@ -44,7 +44,7 @@ def run(fn, inputs, num_workers):
 
 
 def run_with_progress(fn, inputs, num_workers, progress_text):
-    '''Ditto but with a progress bar'''
+    """Ditto but with a progress bar"""
 
     bar = progress_utils.LockedBar(progress_text, len(inputs))
 
@@ -64,7 +64,7 @@ def run_with_progress(fn, inputs, num_workers, progress_text):
 
 
 def run_main(main_fn, parser):
-    '''Adds common parameters to command line parser and executes main fn'''
+    """Adds common parameters to command line parser and executes main fn"""
     parser.add_argument(
         "--context", type=str, help="path to context file", required=True
     )

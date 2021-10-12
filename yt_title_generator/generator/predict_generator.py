@@ -18,7 +18,7 @@ import numpy as np
 
 
 def cosine_similarity(v1, v2):
-    '''Computes cosine similarity metric'''
+    """Computes cosine similarity metric"""
     return tf.matmul(v1, tf.transpose(v2, [1, 0]))
 
 
@@ -27,7 +27,7 @@ def load_model(checkpoint_path):
 
 
 def set_cpu_session():
-    '''Disables GPU'''
+    """Disables GPU"""
     tf.config.set_visible_devices([], "GPU")
     visible_devices = tf.config.get_visible_devices()
     for device in visible_devices:
@@ -35,7 +35,7 @@ def set_cpu_session():
 
 
 def eval_model_main(context, args):
-    '''Main function for model prediction'''
+    """Main function for model prediction"""
 
     if args.cpu:
         set_cpu_session()

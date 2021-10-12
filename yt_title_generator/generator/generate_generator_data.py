@@ -20,7 +20,7 @@ def process_features(
     stemmer,
     writer,
 ):
-    '''Processes all video data'''
+    """Processes all video data"""
     script_features = []
     for line in script_lines:
         toks = tokenize(line, stemmer)
@@ -42,7 +42,7 @@ def process_features(
 
 
 def process_db_video(context, filename, vocab, stemmer, writer):
-    '''Fetches script path from video data and processes features'''
+    """Fetches script path from video data and processes features"""
     with open(filename, "r") as fdata:
         video_data = json.load(fdata)
         video_id = video_data["id"]

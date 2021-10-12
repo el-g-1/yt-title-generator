@@ -23,7 +23,7 @@ def process_features(
     stemmer,
     writer,
 ):
-    '''Processes all video-related data'''
+    """Processes all video-related data"""
     title_tokens = tokenize(title, stemmer)
     if not title_tokens:
         return
@@ -71,7 +71,7 @@ def process_features(
 
 
 def process_db_video(context, filename, vocab, stemmer, writer):
-    '''Processes individual video file'''
+    """Processes individual video file"""
     with open(filename, "r") as fdata:
         video_data = json.load(fdata)
         video_id = video_data["id"]
@@ -95,12 +95,12 @@ def process_db_video(context, filename, vocab, stemmer, writer):
         with open(script_path, "r") as scrdata:
             process_features(
                 title,
-                context.generator.max_title_tokens,
+                context.gan.discriminator.max_title_tokens,
                 scrdata.readlines(),
-                context.generator.max_script_tokens,
+                context.gan.discriminator.max_script_tokens,
                 view_count,
                 subscriber_count,
-                context.generator.num_fake_examples,
+                context.gan.discriminator.num_fake_examples,
                 vocab,
                 stemmer,
                 writer,
@@ -108,17 +108,19 @@ def process_db_video(context, filename, vocab, stemmer, writer):
 
 
 def generate_examples(context, args):
-    '''Generates examples for discriminator model'''
+    """Generates examples for discriminator model"""
     files_in_db_dir = glob.glob(os.path.join(context.db.video_dir, "*"))
     filepaths = [os.path.join(context.db.video_dir, f) for f in files_in_db_dir]
 
-    if os.path.exists(context.generator.data_dir):
-        raise FileExistsError(f"{context.generator.data_dir} already exists")
+    if os.path.exists(context.gan.discriminator.data_dir):
+        raise FileExistsError(f"{context.gan.discriminator.data_dir} already exists")
 
-    os.makedirs(context.generator.data_dir)
+    os.makedirs(context.gan.discriminator.data_dir)
 
     stemmer = SnowballStemmer("russian")
-    writer = sharded_writer_utils.ShardedWriter(output_dir=context.generator.data_dir)
+    writer = sharded_writer_utils.ShardedWriter(
+        output_dir=context.gan.discriminator.data_dir
+    )
 
     vocab = vocabulary_utils.load_vocabulary_tsv(context.embedding.vocabulary_path)
 
@@ -128,7 +130,7 @@ def generate_examples(context, args):
     return run_utils.run_with_progress(
         work,
         filepaths,
-        num_workers=context.generator.num_workers,
+        num_workers=context.gan.discriminator.num_workers,
         progress_text="[Discriminator] Generate examples",
     )
 

@@ -12,7 +12,7 @@ def load_model(checkpoint_path):
 
 
 def define_model(context, embedding_title=None):
-    '''Defines architecture of discriminator model'''
+    """Defines architecture of discriminator model"""
     embedding_model = load_model(context.embedding.model_dir)
 
     vocab = vocabulary_utils.load_vocabulary_tsv(context.embedding.vocabulary_path)
@@ -75,7 +75,7 @@ def define_model(context, embedding_title=None):
 
 
 def train_model(model, dataset, checkpoint_path):
-    '''Trains discriminator model'''
+    """Trains discriminator model"""
     model.compile(loss="binary_crossentropy", optimizer="Adam")
 
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path)
@@ -86,7 +86,7 @@ def train_model(model, dataset, checkpoint_path):
 
 
 def train_model_main(context, args):
-    '''Main function for model training'''
+    """Main function for model training"""
     dataset = transform_to_inputs.transform_to_inputs(context)
 
     model = define_model(context)

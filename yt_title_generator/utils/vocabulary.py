@@ -7,7 +7,7 @@ def merge_sum(dst, other):
 
 
 def save_vocabulary_tsv(vocab, filepath, save_frequencies=True):
-    '''Saves vocabulary into a file'''
+    """Saves vocabulary into a file"""
     out = io.open(filepath, "w", encoding="utf-8")
     if save_frequencies:
         for tok, count in vocab.items():
@@ -19,7 +19,7 @@ def save_vocabulary_tsv(vocab, filepath, save_frequencies=True):
 
 
 def load_vocabulary_tsv(filepath, freq_min=None, freq_max=None):
-    '''Loads vocabulary from a file'''
+    """Loads vocabulary from a file"""
     with open(filepath, "r") as fdata:
         vocab = {}
         vocab["PAD"] = 0

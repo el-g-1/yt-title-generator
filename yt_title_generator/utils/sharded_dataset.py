@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 def load_dataset(glob_path, example_to_input_fn, output_types=None, output_shapes=None):
-    '''Loads files into a dataset and executes example_to_input_fn for each element'''
+    """Loads files into a dataset and executes example_to_input_fn for each element"""
     file_dataset = tf.data.Dataset.list_files(glob_path)
 
     record_dataset = file_dataset.interleave(
@@ -18,7 +18,5 @@ def load_dataset(glob_path, example_to_input_fn, output_types=None, output_shape
         return generator
 
     return tf.data.Dataset.from_generator(
-        generator,
-        output_types=output_types,
-        output_shapes=output_shapes,
+        generator, output_types=output_types, output_shapes=output_shapes,
     )
